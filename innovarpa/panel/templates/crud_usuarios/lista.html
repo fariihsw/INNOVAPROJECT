@@ -1,0 +1,41 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+
+<div class="right_col" role="main">
+<h1>Productos Añadido</h1>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">COD.</th>
+        <th scope="col">NOMBRE PRODUCTO</th>
+        <th scope="col">STOCK</th>
+        <th scope="col">TIPO DE UNIDAD</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+
+
+    {% for p in inventario %}
+      <tr>
+        <th scope="row"></th>
+        <td>{{ p.id_producto }}</td>
+        <td>{{ p.nombre_producto }}</td>
+        <td>{{ p.cantidad_producto }}</td>
+        <td>{{ p.tipo_unidad }}</td>
+      </tr>
+  
+      
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
+
+
+
+{% endblock %}

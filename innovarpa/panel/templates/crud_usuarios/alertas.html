@@ -1,0 +1,64 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+
+
+
+
+<div class="right_col" role="main">
+    <h1>Alertas</h1>
+
+
+    <div class="right_col" role="main">
+  
+
+        
+        
+        <table class="table table-danger" style="width:100%">
+            <thead>
+              <tr>
+                <th scope="col">Descripción</th>
+                <th scope="col">Calidad</th>
+                <th scope="col">Hora Alerta</th>
+                <th scope="col">Empresa</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+
+              {% for a in alertass %}
+                <tr>
+                  <th scope="row">{{ a.descripcion }}</th>
+                  <td>{{ a.calidad_alerta }}</td>
+                  <td>{{ a.fecha }}</td>
+                  <td>{{ a.empresa_id }}</td>
+                </tr>
+            
+              {% endfor %}
+              </tbody>
+          </table>
+<!---
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        -->
+        
+        </div>
+
+</div>
+
+{% endblock %}

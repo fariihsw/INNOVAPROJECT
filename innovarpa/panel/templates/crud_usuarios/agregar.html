@@ -1,0 +1,51 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+
+<div class="right_col" role="main">
+  <center>
+  <h1>Añadir Producto</h1>
+    <form method="post" style="width:60%">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <hr>
+        <div>
+          <label for="id_nombre_producto">Codigo del Producto:</label>
+          <div>
+          {{ form.id_producto.errors }}
+          {{ form.id_producto }}
+        </div>
+      </div>
+      
+      <hr>
+        <div>
+            <label for="id_nombre_producto">Nombre del Producto:</label>
+            <div>
+            {{ form.nombre_producto.errors }}
+            {{ form.nombre_producto }}
+          </div>
+        </div>
+        <hr>
+        <div>
+            <label for="id_cantidad_producto">Cantidad:</label>
+            <div>
+            {{ form.cantidad_producto.errors }}
+            {{ form.cantidad_producto }}
+          </div>
+        </div>
+        <hr>
+        <div>
+            <label for="id_tipo_unidad">Tipo de Unidad:</label>
+            <div>
+            {{ form.tipo_unidad.errors }}
+            {{ form.tipo_unidad }}
+          </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success">Añadir Producto  <i class="fa fa-check"></i></button>
+    </form>
+
+  
+  </center>
+</div>
+
+{% endblock %}

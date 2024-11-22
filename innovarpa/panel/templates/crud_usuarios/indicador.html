@@ -1,0 +1,105 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+
+<div class="right_col" role="main">
+ <h1>.</h1>
+
+    <div class="right_col" role="main">
+      <h1>Inventario</h1>
+
+        
+        
+        <table class="table table">
+            <thead>
+              <tr>
+                <th scope="col">ID Empresa</th>
+                <th scope="col">Codigo_producto</th>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Tipo de unidad</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              {% for i in inventario %}
+                <tr>
+                  <th scope="row">{{ i.empresa_id }}</th>
+                  <td>{{ i.id_producto }}</td>
+                  <td>{{ i.nombre_producto }}</td>
+                  <td>{{ i.cantidad_producto }}</td>
+                  <td>{{ i.tipo_unidad }}</td>
+                </tr>
+            
+              {% endfor %}
+              </tbody>
+          </table>
+<!--
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        -->
+        
+          <hr>
+          <hr>
+
+
+       
+
+
+        <h1>Indicador de Inventario</h1>
+
+        <canvas id="stockChart" width="400" height="200"></canvas>
+    
+        <script>
+            const ctx = document.getElementById('stockChart').getContext('2d');
+            const stockMinimo = {{ stock_minimo }};
+            const stockMaximo = {{ stock_maximo }};
+    
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Stock Mínimo', 'Stock Máximo'],
+                    datasets: [{
+                        label: 'Cantidad de Productos',
+                        data: [stockMinimo, stockMaximo],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    
+        
+
+      </div>
+
+{% endblock %}

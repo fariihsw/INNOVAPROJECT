@@ -1,0 +1,64 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+
+<div class="right_col" role="main">
+    <center>
+    <h1>Eliminar Producto</h1>
+    <hr>
+        <hr>
+    <form action="{% url 'eliminar' %}" method="POST">
+        {% csrf_token %}
+        <label  for="producto">Selecciona un producto para eliminar:</label>
+        <select class="form-select" aria-label="Default select example" name="id_inventario" id="producto" required>
+            <option value="">-- Selecciona un producto --</option>
+            {% for inventario in productos %}
+                <option value="{{ inventario.id_inventario }}">{{ inventario.nombre_producto }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <hr>
+        <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i>  Eliminar Producto</button>
+    </form>
+    <hr>
+
+    <a calss="btn btn-light"href="{% url 'lista' %}">Volver a la lista de productos</a>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </center>
+</div>
+<!--
+
+<div class="right_col" role="main">
+    <h1>Eliminar usuarios</h1></div>
+    
+    <form action="eliminar" method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group row">
+          <label for="nombre" class="col-4 col-form-label">ID Usuario</label> 
+          <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-id-badge"></i>
+                </div>
+    
+                <select id="id" name="id">
+                {% for u in usuarios %}
+                    <option value="{{u.id}}">1</option>
+                    <!--<option value="2">2</option>-->
+       <!--             {% endfor %}
+                </select>
+              </div> 
+          </div>
+        </div>
+    
+     
+-->
+{% endblock %}

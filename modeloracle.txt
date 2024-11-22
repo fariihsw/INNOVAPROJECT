@@ -1,0 +1,54 @@
+class Empresa(models.Model):
+    id = models.AutoField(primary_key=True)  # Se utiliza AutoField para que sea un ID auto-incremental
+    nombre = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = 'empresa'
+
+
+class Usuario(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.EmailField(max_length=30, unique=True)  # Se asume que es un correo electrónico
+    password = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=200)
+    apellido = models.CharField(max_length=30)
+    rut = models.CharField(max_length=10)
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'usuario'
+
+
+class Alertas(models.Model):
+    id = models.AutoField(primary_key=True)
+    descripcion = models.CharField(max_length=200, blank=True, null=True)
+    fecha = models.DateTimeField()
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'alertas'
+
+
+class Inventario(models.Model):
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    id_producto = models.IntegerField()  # Si es un identificador, podría ser mejor usar AutoField o otro tipo adecuado
+    nombre_producto = models.CharField(max_length=200)
+    cantidad_producto = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = 'inventario'
+        unique_together = ('empresa', 'id_producto')  # Opción para asegurar que no haya duplicados por empresa e id_producto
+
+
+class Roles(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=200)
+    permisos = models.CharField(max_length=200)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'roles'
+
+
+

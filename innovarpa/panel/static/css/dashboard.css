@@ -1,0 +1,58 @@
+<style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4; /* Color de fondo suave */
+                margin: 0;
+                padding: 20px;
+            }
+    
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+    
+            h2 {
+                color: #555;
+            }
+    
+            .productos-container {
+                display: flex;
+                justify-content: space-around; /* Espacio alrededor de los elementos */
+                margin-top: 20px;
+            }
+    
+            .producto {
+                background-color: #fff; /* Fondo blanco para las tarjetas */
+                border-radius: 8px; /* Bordes redondeados */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+                padding: 20px; /* Espaciado interno */
+                width: 30%; /* Ancho de cada tarjeta */
+                text-align: center; /* Centrar texto */
+                transition: transform 0.2s; /* Transición suave para el hover */
+            }
+    
+            .producto:hover {
+                transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+            }
+    
+            .producto h3 {
+                color: #007BFF; /* Color del título */
+            }
+    
+            .producto strong {
+                font-size: 1.5em; /* Tamaño de fuente más grande para el nombre del producto */
+                color: #333; /* Color del texto */
+            }
+    
+            .no-producto {
+                color: #888; /* Color para el texto de "no hay productos" */
+            }
+    
+            /* Estilo para el mensaje de bienvenida */
+            .mensaje-bienvenida {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+                color: #28a745; /* Color verde para el mensaje */
+            }
+        </style>

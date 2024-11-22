@@ -1,0 +1,191 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %} %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="right_col" role="main">
+    <h1></h1>
+
+    
+    <hr>
+    <hr>
+    <hr>
+    
+    <p>Bienvenid@ {{ usuario.nombre }}  {{usuario.apellido}}</p>
+
+ <diV Class= "row">
+    <div class="col-md">
+    <h1>Dashboard de Inventario</h1>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>ID Producto</th>
+            <th>Nombre Producto</th>
+            <th>Cantidad Producto</th>
+            <th>Tipo Unidad</th>
+        </tr>
+        {% for producto in inventario %}
+        <tr>
+            <td>{{ producto.id_producto }}</td>
+            <td>{{ producto.nombre_producto }}</td>
+            <td>{{ producto.cantidad_producto }}</td>
+            <td>{{ producto.tipo_unidad }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+    <canvas id="myChart"  style="width: 100%; max-width: 500px; height: 150px;"></canvas>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const labels = [{% for producto in productos %}'{{ producto.nombre_producto }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Cantidad de Productos',
+                data: [{% for producto in productos %}{{ producto.cantidad_producto }}{% if not forloop.last %}, {% endif %}{% endfor %}],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'bar', // Puedes cambiar a 'line', 'pie', etc.
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+        const myChart = new Chart(ctx, config);
+    </script>
+
+
+    
+    <div class="col-md">
+
+
+    <h2>Gráfico Circular de Stock por Producto</h2>
+    <div style="width: 100%; max-width: 500px; height: 400px;">
+        <canvas id="pieChart"></canvas>
+    </div>
+</div>
+</div>
+        <script>
+            const ctxPie = document.getElementById('pieChart').getContext('2d');
+            const pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: {{ nombres_productos|safe }},
+                    datasets: [{
+                        label: 'Cantidad de Stock',
+                        data: {{ cantidades_productos|safe }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribución de Stock por Producto'
+                        }
+                    }
+                }
+            });
+        </script>
+
+    
+        <hr>
+        <hr>
+
+
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-black bg-light mb-3">
+                        <div class="card-header">Productos   <i class="fa fa-dropbox"></i></div>
+                        <div class="card-body">
+                     
+                            <ul>
+                                {% for producto in productos %}
+                                    <li>{{ producto.nombre_producto }}: {{ producto.cantidad_producto }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header">Producto con Mayor Stock   <i class="fa fa-check"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Sobre óptimo</h5>
+                            {% if producto_mayor_stock %}
+                                <div>
+                                    <strong>{{ producto_mayor_stock.nombre_producto }}</strong>: {{ producto_mayor_stock.cantidad_producto }} unidades
+                                </div>
+                            {% else %}
+                                <div>No hay productos disponibles.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-header">Producto con Menor Stock    <i class="fa fa-exclamation"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Precaución</h5>
+                            {% if producto_menor_stock %}
+                                <div>
+                                    <strong>{{ producto_menor_stock.nombre_producto }}</strong>: {{ producto_menor_stock.cantidad_producto }} unidades
+                                </div>
+                            {% else %}
+                                <div>No hay productos disponibles.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+
+
+       
+    
+    </div>
+        
+
+
+
+
+</body>
+
+
+{% endblock %}

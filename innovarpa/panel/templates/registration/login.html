@@ -1,0 +1,59 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/ico">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="">
+    <title>INNOVA LOGIN</title>
+</head>
+<body style="background: url({% static 'orange.jpg' %}); background-size: 100% auto;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <img src="{% static 'INNOVA_LOGO.jpg' %}" alt="INNOVA Logo" style="width:40%; padding-right: 10px;">
+                <div class="card" style="background: linear-gradient(50deg, rgba(255, 255, 255, 0.4) 12%, rgba(255, 255, 255, 0.1) 77%); border-radius:30px;">
+                    <div class="card-body">
+                        <center>
+                            <h2 class="text-monospace">Ingresa tus Datos</h2>
+                            <hr>
+                            
+                            <form class="login" action="" method="POST">
+                                {% csrf_token %}
+                                {% if error %}
+                                    <p style="color: red;">{{ error }}</p>
+                                {% endif %}
+                               
+                                <div class="form-group col-6">
+                                    <label for="username"><i class="fa fa-user-check"></i> Usuario:</label>
+                                    <input type="text" name="username" class="form-control" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="password">Contraseña:</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                 </div>
+                            <!--
+                                 <div class="form-group col-6">
+                                    <label for="username"><i class="fa fa-user-check"></i> Usuario:</label>
+                                    <input type="text" name="username" id="username" class="form-control" required>
+                                  -->
+
+                               <a href="{% url 'registro' %}" > <span style="text-decoration: underline; cursor: pointer;">Olvidé la contraseña...</span></a>
+                              
+                               <button type="" class="btn btn-dark btn-block">Entrar</button>
+                                
+                            </form>
+                             
+
+                        </center>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

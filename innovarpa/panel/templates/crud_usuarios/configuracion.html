@@ -1,0 +1,32 @@
+{% extends '../index_junior.html'%}
+{% block content %}
+
+
+
+<div class="right_col" role="main">
+    
+    <h1>Configuración de Usuario</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'dashboard' %}">Volver a inicio</a><!-- Cambia 'home' por la URL de tu página de inicio -->
+
+
+
+        
+        
+</div>
+
+
+
+
+{% endblock %}
